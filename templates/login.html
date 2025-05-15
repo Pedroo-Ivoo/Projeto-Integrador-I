@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style_login.css">
+    <title>Transporte Seguro</title>
+</head>
+<body>
+    <h1 class="titulo">Transporte Seguro</h1>
+    <p class="texto"> Boas vindas a página de controle do transporte seguro. <br> Para poder acessar as informações realize o login.</p>
+    <form action="\login" method="post">
+        <h3>Insira seu usuário</h3>
+        <input type="text" name="usuario" placeholder="Usuario" required>
+        <input type="password" name="senha" placeholder="Senha"required>
+        <input type="submit" value="Entrar">
+    </form>
+    {% if erro %}
+<p style="color: red;">{{ erro }}</p>
+{% endif %}
+
+</body>
+</html>

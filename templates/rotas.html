@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <title>Cadastro de Alunos</title>
+  </head>
+  <body>
+    <header>
+      <h1>Cadastro dos Alunos</h1>
+      <p class="subtitulo">
+        Para o cadastro dos alunos é preciso selecionar a região e o motorista.
+    </header>
+    <main>
+      <div class="cadastro">
+        <form class="formulario" action="Post">
+          <div class="estrutura">
+            <label for="Nome"> Nome:</label><br />
+            <input type="text" id="nome" required />
+          </div>
+
+          <div class="estrutura">
+            <label for="zona">Região:</label>
+            <select name="regiao" id="zona">
+              {% for regiao in motoristas_por_regiao.keys() %}
+              <option value="{{ regiao }}">{{ regiao }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="estrutura">
+            <label for="motoristas">Motorista:</label>
+            <select class="motoristas" id="motoristas"></select>
+          </div>
+
+          <div class="estrutura">
+            <label for="Celular"> Celular:</label><br />
+            <input type="text" id="celular" required />
+          </div>
+
+          <div class="opcoes">
+            <button class="salvar" type="submit">Salvar</button>
+            <button class="cancelar" type="button">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>

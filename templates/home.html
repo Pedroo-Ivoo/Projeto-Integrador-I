@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/style.css" />
+    
+    <title>Início</title>
+  </head>
+  <body>
+    <header>
+      <div class="nome_login">
+      <h1 class="titulo">Aqui temos as informações da pagina</h1>
+      <p class="texto">{{nome}} <a class="link_logout" href="{{ url_for('logout') }}"> Encerrar sessão</a></p>
+      </div>
+      <nav>
+        <ul class="menu">
+          <li class="botao_nav"><a class="link" href="/home">Início</a></li>
+          <li class="botao_nav"><a class="link" href="/cadastro">Cadastro</a></li>
+          <li class="botao_nav"><a class="link" href="/rotas">Rotas</a></li>
+          
+        </ul>
+      </nav>
+    </header>
+    <main>
+        <p class="texto">O transporte seguro tem por objetivo organizar, dar maior transparência ao transporte dos alunos e agilizar as rotas dos motoristas. </p>
+        <p class="texto">Navegue pelo menu no topo da página, aqui teremos uma breve explicação de cada opção para melhorar a experiência da navegação.</p>
+        <ul>
+            <li class="texto">Inicio. É onde estamos. Sempre que precisar voltar a página inicial para rever as informações</li>
+            <li class="texto">Cadastro. Página no qual se cadastra o motoristas e sua lista de passageiro</li>
+            <li class="texto">Rotas. Exibe a lista das rotas já cadastradas</li>
+            
+        </ul>
+    </main>
+    <footer class="rodape"Projeto desenvolvido pelos alunos do curso de tecnologia da informação da Univesp</footer>
+  </body>
+</html>
