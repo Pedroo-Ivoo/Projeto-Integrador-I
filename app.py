@@ -33,7 +33,7 @@ def login():
         senha = request.form["senha"]
     
         #Controle de acesso.
-        if usuario == "Pedro" and senha == "123":
+        if usuario == "Administrador" and senha == "admin":
             session['usuario_logado'] = True 
             session['nome'] = usuario
             return redirect(url_for("home"))
