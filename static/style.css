@@ -1,8 +1,8 @@
-/* @import url(/static/style_login.css); */
 body {
     background: linear-gradient(to bottom, #f4f4f9, white);
     width: 100% ;
-    height: 100vh;
+    height: 100%;
+    min-height: 90vh;
     font-family: Arial, sans-serif;
     background-size: cover;
     background-position: center;
@@ -10,10 +10,32 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
-    overflow: hidden;
+    overflow: auto;
 }
+header{
+  width: 40%;
+  text-align: center;
+}
+main{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex: 1;
+  flex-grow: 1;
+  margin-top: 5em;
+  width: 80%;
+  min-height: calc(65vh - 100px); /* 100px é um exemplo da altura do footer */
+
+
+}
+/* Rodapé */
+footer{
+  position: relative;
+  bottom: 0;
+}
+
 /* Configuração do formato do formulário de cadastro. */
 .cadastro{
   width: 800px;
@@ -25,7 +47,7 @@ body {
 /* Estiliza toda tah h3 de título */
 h3{
   font-size: 24px;
-      margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 .subtitulo{
   align-items: center;
@@ -75,6 +97,10 @@ input::-webkit-inner-spin-button{appearance: none;}
 
 /* Estilização para a posição do login */
 .nome_login{
+position: absolute;
+top: 0;
+right: 0;
+
 display: flex;
 flex-direction: column;
 align-items: flex-end;
@@ -95,6 +121,7 @@ li{
   border-radius: 4px;
   padding: 10px 15px;
   text-align: center;
+  align-content: center;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -118,13 +145,19 @@ li{
 }
 .link_logout:visited{
   color: blue;
-  
 }
-
+.aviso{
+  display: flex;
+  justify-content: center;
+}
+.erro{
+  color: red;
+}
 .opcoes{
   display: flex;
   justify-content: flex-start;
 }
+/* Botões salva, cancelar, editar, deletar */
 .salvar{
   background-color: #28a745;
   color: white;
@@ -138,13 +171,178 @@ li{
   transition: background-color 0.3s ease;
 }
 .cancelar{
-background-color: red;
+background-color: #6c757d;
 color: white;
   border: none;
   border-radius: 4px;
   padding: 10px 15px;
+    margin-right: 15px;
+
   text-align: center;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+.editar{
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 10px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.deletar{
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 10px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+/* Configuração do Menu Hamburguer */
+
+
+.dropdown-menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.dropdown-menu ul li {
+    display: block;
+    position: relative;
+    
+}
+
+.dropdown-menu ul li a {
+    text-decoration: none;
+    display: inline-block;
+    /* padding: 10px; */
+    transition: background .3s;
+}
+
+
+/*sub menu*/
+.dropdown-menu ul ul {
+    display: none;
+    top: 100%;
+    left: 0;
+    position: absolute;
+}
+
+.dropdown-menu ul li:hover ul {
+    display: block;
+}
+
+.dropdown-menu ul ul {
+    width: 150px
+}
+
+.dropdown-menu ul ul li a {
+    display: block;
+}
+
+/* Configuração do flash */
+.flash-messages {
+    list-style: none;
+    padding: 10px;
+    background-color: #dff0d8;
+    color: red;
+    border: 1px solid #3c763d;
+    margin-bottom: 10px;
+}
+
+/* Configuração da tabela. */
+table {
+  font-family: arial, sans-serif;
+  border: 1px solid #dddddd;
+  /* border-collapse:collapse; */
+  border-radius: 15px;
+  width:100%;
+}
+.nome_tabela{
+  width: 70%;
+}
+.regiao_tabela{
+  width: 10%;
+}
+.telefone_tabela{
+  width: 20%;
+}
+td, th {
+  /* border: 1px solid #dddddd; */
+  border-radius: 15px;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+/* Configuração do Accordion */
+#container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.accordion {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+}
+span{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.accordion-header {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.accordion-header span {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.accordion-body {
+    color: #444;
+    font-size: 14px;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity .3s;
+}
+
+.accordion-body.active {
+    height: 100%;
+    opacity: 1;
+    padding: 5px 0px;
+}
+
+.arrow {
+    transition: transform .2s linear;
+}
+
+.accordion:has(.active) .arrow {
+    transform: rotate(180deg);
 }

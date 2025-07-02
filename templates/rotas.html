@@ -3,50 +3,116 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
     <link rel="stylesheet" href="/static/style.css" />
-    <title>Cadastro de Alunos</title>
+    <title>Rotas</title>
   </head>
   <body>
+    <div class="nome_login">
+      <p class="texto">
+        <a class="link_logout" href="{{ url_for('logout') }}">
+          Encerrar sessão</a
+        >
+      </p>
+    </div>
     <header>
-      <h1>Cadastro dos Alunos</h1>
-      <p class="subtitulo">
-        Para o cadastro dos alunos é preciso selecionar a região e o motorista.
+      <h1>Rotas</h1>
+      <nav class="dropdown-menu">
+        <ul class="menu">
+          <li class="botao_nav"><a class="link" href="/home">Início</a></li>
+          <li class="botao_nav">
+            Cadastrar
+            <ul class="lista-menu">
+              <li class="botao_nav">
+                <a class="link" href="/cadastro_motoristas">Motoristas</a>
+              </li>
+              <li class="botao_nav">
+                <a class="link" href="/cadastro_alunos">Alunos</a>
+              </li>
+            </ul>
+          </li>
+          <li class="botao_nav">
+            Exibir
+            <ul class="lista-menu">
+              <li class="botao_nav">
+                <a class="link" href="/motoristas">Motoristas Cadastrados</a>
+              </li>
+              <li class="botao_nav">
+                <a class="link" href="/alunos">Alunos Cadastrados</a>
+              </li>
+            </ul>
+          </li>
+          <li class="botao_nav"><a class="link" href="/rotas">Rotas</a></li>
+        </ul>
+      </nav>
     </header>
+
     <main>
-      <div class="cadastro">
-        <form class="formulario" action="Post">
-          <div class="estrutura">
-            <label for="Nome"> Nome:</label><br />
-            <input type="text" id="nome" required />
-          </div>
+      {% with mensagens = get_flashed_messages() %} {% if mensagens %}
+      <ul class="flash-messages">
+        {% for msg in mensagens %}
+        <li class="aviso">{{ msg }}</li>
+        <!-- Aqui exibindo a mensagem corretamente -->
+        {% endfor %}
+        <p>Para cadastrar motorista vá em "Cadastrar > Motoristas".</p>
+      </ul>
+      {% endif %} {% endwith %}
 
-          <div class="estrutura">
-            <label for="zona">Região:</label>
-            <select name="regiao" id="zona">
-              {% for regiao in motoristas_por_regiao.keys() %}
-              <option value="{{ regiao }}">{{ regiao }}</option>
-              {% endfor %}
-            </select>
-          </div>
+      <div id="container">
+        {% for motorista in motoristas %}
 
-          <div class="estrutura">
-            <label for="motoristas">Motorista:</label>
-            <select class="motoristas" id="motoristas"></select>
-          </div>
+        <div class="accordion">
+          <button class="accordion-header">
+            <span> <p>Motorista {{ motorista.nome }} </p><p> Região {{motorista.regiao.nome}}</p> </span>
+            <i class="fa-solid fa-chevron-down arrow"></i>
+          </button>
 
-          <div class="estrutura">
-            <label for="Celular"> Celular:</label><br />
-            <input type="text" id="celular" required />
-          </div>
+          <div class="accordion-body">
+            <table>
+              <thead>
+                <tr>
+                  <th class="nome_tabela">Nome</th>
+                  <th class="telefone_tabela">Telefone</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for aluno in motorista.alunos %} 
+                <tr>
+                  <td>{{ aluno.nome }}</td>
+                  <td>{{ aluno.celular }}</td>
+                </tr>
+                {% else %}
+    <tr>
+      <td colspan="2">Nenhum aluno cadastrado para este motorista.</td>
+    </tr>
 
-          <div class="opcoes">
-            <button class="salvar" type="submit">Salvar</button>
-            <button class="cancelar" type="button">Cancelar</button>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
-        </form>
+        </div>
+        {% endfor %}
+
+        
       </div>
+
     </main>
 
+    <footer>
+      <p>
+        Desenvolvido em grupo pelos alunos do grupo DRP07-PJI1 do Eixo de
+        Computação da UNIVESP
+      </p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
     <script src="/static/script.js"></script>
   </body>
 </html>

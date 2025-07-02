@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <title>Edição de cadastro do motoristas</title>
+    </head>
+    <body>
+      <div class="nome_login">
+    <p class="texto"><a class="link_logout" href="{{ url_for('logout') }}"> Encerrar sessão</a></p>
+    </div>
+      <header>
+        <h1>Edição de cadastro do motoristas</h1>
+        <nav class="dropdown-menu">
+        <ul class="menu">
+          <li class="botao_nav"><a class="link" href="/home">Início</a></li>
+          <li class="botao_nav">Cadastrar
+            <ul class="lista-menu">
+              <li class="botao_nav"><a class="link" href="/cadastro_motoristas">Motoristas</a></li>
+              <li class="botao_nav"><a class="link" href="/cadastro_alunos">Alunos</a></li>
+          </ul>
+          </li>
+          <li class="botao_nav">Exibir
+            <ul class="lista-menu">
+              <li class="botao_nav"><a class="link" href="/motoristas">Motoristas Cadastrados</a></li>
+              <li class="botao_nav"><a class="link" href="/alunos">Alunos Cadastrados</a></li>
+            </ul>
+          </li>
+          <li class="botao_nav"><a class="link" href="/rotas">Rotas</a></li>
+        </ul>
+      </nav>
+    </header>
+      </header>
+    <main>
+      <div>Altere os dados necessários e depois aperte o botão salvar. Caso queira deletar apenas aperte o botão deletar. Atenção que ao apagar o cadastro não terá como restaurá-lo.</div>
+      <div>
+      {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flash-messages">
+            {% for message in messages %}
+                <li class="aviso">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+</div>
+      <div class="cadastro">
+        <form class="formulario" method="POST">
+          <div class="estrutura">
+            <label for="Nome"> Nome:</label><br />
+            <input type="text" name="nome" id="nome" value="{{ request.form.get('nome') or nome }}" required />
+          </div>
+          <div class="estrutura">
+            <label class="rota-texto" for="Rota"> Rota:</label>
+            <input type="text" name="rota" id="rota" value="{{ request.form.get('rota') or rota }}" required />
+            <label for="Região">Região: </label>
+            <select class="regiao" name="regiao_id" id="zona" required>
+            <option value="">Selecione</option>
+            <option value="1" {% if regiao_id == "1" or regiao_id == 1 %}selected{% endif %}>Norte</option>
+            <option value="2" {% if regiao_id == "2" or regiao_id == 2 %}selected{% endif %}>Sul</option>
+            <option value="3" {% if regiao_id == "3" or regiao_id == 3 %}selected{% endif %}>Leste</option>
+            <option value="4" {% if regiao_id == "4" or regiao_id == 4 %}selected{% endif %}>Oeste</option>
+          </select>
+            <!-- <select class="regiao" name="regiao_id" id="zona" required>
+              <option value="">Selecione</option>
+              <option value="1">Norte</option>
+              <option value="2">Sul</option>
+              <option value="3">Leste</option>
+              <option value="4">Oeste</option>
+            </select> -->
+          </div>
+          <div class="estrutura">
+            <label for="Celular"> Celular:</label><br />
+            <input type="text" name="celular" id="celular" placeholder="(xx) xxxxx-xxxx" value="{{ request.form.get('celular') or celular }}" />
+          </div>
+          <div class="opcoes">
+            <button class="salvar" type="submit"> Salvar</button>
+            <button class="cancelar" type="reset"> Cancelar</button>
+          </form>
+            <form action="{{ url_for('delete', id=motorista.id) }}" method="post">
+              <button id="deletar" class="deletar" type="submit"> Deletar</button>
+            </form>
+          </div>
+        </div>
+    </main>
+    <footer>
+        <p>Desenvolvido em grupo pelos alunos do grupo DRP07-PJI1 do Eixo de Computação da UNIVESP</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+</html>

@@ -8,30 +8,45 @@
     <title>Início</title>
   </head>
   <body>
+    <div class="nome_login">
+    <p class="texto">{{nome}} <a class="link_logout" href="{{ url_for('logout') }}"> Encerrar sessão</a></p>
+    </div>
     <header>
-      <div class="nome_login">
-      <h1 class="titulo">Aqui temos as informações da pagina</h1>
-      <p class="texto">{{nome}} <a class="link_logout" href="{{ url_for('logout') }}"> Encerrar sessão</a></p>
-      </div>
-      <nav>
+      <h1 class="titulo">Transporte Seguro</h1>
+      <nav class="dropdown-menu">
         <ul class="menu">
           <li class="botao_nav"><a class="link" href="/home">Início</a></li>
-          <li class="botao_nav"><a class="link" href="/cadastro">Cadastro</a></li>
+          <li class="botao_nav">Cadastrar
+            <ul class="lista-menu">
+              <li class="botao_nav"><a class="link" href="/cadastro_motoristas">Motoristas</a></li>
+              <li class="botao_nav"><a class="link" href="/cadastro_alunos">Alunos</a></li>
+          </ul>
+          </li>
+          <li class="botao_nav">Exibir
+            <ul class="lista-menu">
+              <li class="botao_nav"><a class="link" href="/motoristas">Motoristas Cadastrados</a></li>
+              <li class="botao_nav"><a class="link" href="/alunos">Alunos Cadastrados</a></li>
+            </ul>
+          </li>
           <li class="botao_nav"><a class="link" href="/rotas">Rotas</a></li>
-          
         </ul>
       </nav>
     </header>
     <main>
-        <p class="texto">O transporte seguro tem por objetivo organizar, dar maior transparência ao transporte dos alunos e agilizar as rotas dos motoristas. </p>
-        <p class="texto">Navegue pelo menu no topo da página, aqui teremos uma breve explicação de cada opção para melhorar a experiência da navegação.</p>
+        <p class="texto">O transporte seguro tem por objetivo organizar e dar maior transparência ao transporte dos alunos além de agilizar as rotas dos motoristas. </p>
+        <p class="texto">Navegue pelo menu no topo da página para as funções já disponíveis. Aqui teremos uma breve explicação de cada opção para melhorar a experiência da navegação.
+        Sempre que precisar volte paraestá página para rever as informações.</p>
         <ul>
-            <li class="texto">Inicio. É onde estamos. Sempre que precisar voltar a página inicial para rever as informações</li>
-            <li class="texto">Cadastro. Página no qual se cadastra o motoristas e sua lista de passageiro</li>
-            <li class="texto">Rotas. Exibe a lista das rotas já cadastradas</li>
+          <li class="texto"> Na seção cadastrar temos duas opções: <li class="texto">1. Motoristas - Para cadastro dos motoristas da escola.</li>
+          <li class="texto">2.  Alunos - Para cadastrar alunos que serão transportados. </li> 
+            </li>
+            <li class="texto">Na seção exibir é o local em que é possível realizar a consulta aos motoristas e alunos já cadastrados, bem como realizar a alterações e apagar os cadastros.</li>
+            <li class="texto">Na seção de rotas é possível verificar cada rota dos motoristas e seus respectivos alunos cadastrados.</li>
             
         </ul>
     </main>
-    <footer class="rodape"Projeto desenvolvido pelos alunos do curso de tecnologia da informação da Univesp</footer>
-  </body>
+<footer>
+        <p>Desenvolvido em grupo pelos alunos do grupo DRP07-PJI1 do Eixo de Computação da UNIVESP</p>
+    </footer>
+    </body>
 </html>

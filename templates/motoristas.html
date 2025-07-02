@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css" />
+    <title>Lista dos Motoristas</title>
+</head>
+<body>
+    <div class="nome_login">
+    <p class="texto"><a class="link_logout" href="{{ url_for('logout') }}"> Encerrar sessão</a></p>
+    </div>
+    <header>
+        <h1>Lista dos Motoristas Cadastrados</h1>
+        <nav class="dropdown-menu">
+        <ul class="menu">
+          <li class="botao_nav"><a class="link" href="/home">Início</a></li>
+          <li class="botao_nav">Cadastrar
+            <ul class="lista-menu">
+              <li class="botao_nav"><a class="link" href="/cadastro_motoristas">Motoristas</a></li>
+              <li class="botao_nav"><a class="link" href="/cadastro_alunos">Alunos</a></li>
+          </ul>
+          </li>
+          <li class="botao_nav">Exibir
+            <ul class="lista-menu">
+              <li class="botao_nav"><a class="link" href="/motoristas">Motoristas Cadastrados</a></li>
+              <li class="botao_nav"><a class="link" href="/alunos">Alunos Cadastrados</a></li>
+            </ul>
+          </li>
+          <li class="botao_nav"><a class="link" href="/rotas">Rotas</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+        <div>Para alterar ou apagar o cadastro do motorista clique em editar.</div>
+        <div>
+        {% with mensagens = get_flashed_messages() %}
+        {% if mensagens %}
+        <ul class="flash-messages">
+            {% for msg in mensagens %}
+            <li class="aviso">{{ msg }}</li>  <!-- Aqui exibindo a mensagem corretamente -->
+            {% endfor %}
+            <p>Para cadastrar motorista vá em "Cadastrar > Motoristas".</p>
+        </ul>
+        {% endif %}
+        {% endwith %}
+        </div>
+        <table>
+    <thead>
+        <tr>
+            <th class="nome_tabela">Nome</th>
+            <th class="telefone_tabela">Telefone</th>
+            <th class="regiao_tabela">Região</th>
+            <th class="regiao_tabela">Editar</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for motorista in motoristas %}
+        <tr>
+            <td>{{ motorista.nome }}</td> 
+            <td>{{ motorista.celular }}</td>
+            <td>{{ motorista.regiao.nome }}</td>  
+            <td><button class="editar"><a class="link" href="{{ url_for('edit', id=motorista['id']) }}">Editar</a></button></td>
+        </tr> 
+        {% endfor %}
+    </tbody>
+</table>
+
+    </main>
+
+    <footer>
+        <p>Desenvolvido em grupo pelos alunos do grupo DRP07-PJI1 do Eixo de Computação da UNIVESP</p>
+    </footer>
+</body>
+</html>

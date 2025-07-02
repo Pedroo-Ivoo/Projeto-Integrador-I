@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <title>Cadastro</title>
+    </head>
+    <body>
+      <div class="nome_login">
+    <p class="texto"><a class="link_logout" href="{{ url_for('logout') }}"> Encerrar sessão</a></p>
+    </div>
+      <header>
+        <h1>Cadastro de motoristas</h1>
+        <nav class="dropdown-menu">
+        <ul class="menu">
+          <li class="botao_nav"><a class="link" href="/home">Início</a></li>
+          <li class="botao_nav">Cadastrar
+            <ul class="lista-menu">
+              <li class="botao_nav"><a class="link" href="/cadastro_motoristas">Motoristas</a></li>
+              <li class="botao_nav"><a class="link" href="/cadastro_alunos">Alunos</a></li>
+          </ul>
+          </li>
+          <li class="botao_nav">Exibir
+            <ul class="lista-menu">
+              <li class="botao_nav"><a class="link" href="/motoristas">Motoristas Cadastrados</a></li>
+              <li class="botao_nav"><a class="link" href="/alunos">Alunos Cadastrados</a></li>
+            </ul>
+          </li>
+          <li class="botao_nav"><a class="link" href="/rotas">Rotas</a></li>
+        </ul>
+      </nav>
+    </header>
+      </header>
+    <main>
+      <div class="estrutura"><p class="texto">
+        Todos os campos são necessários para a realização do cadastro. 
+      </p></div>
+      <div>
+      {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flash-messages">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+</div>
+      <div class="cadastro">
+        <form class="formulario" method="POST">
+          <div class="estrutura">
+            <label for="Nome"> Nome:</label><br />
+            <input type="text" name="nome" id="nome" required />
+          </div>
+          <div class="estrutura">
+            <label class="rota-texto" for="Rota"> Rota:</label>
+            <input type="text" name="rota" id="rota" required />
+            <label for="Região">Região: </label>
+            <select class="regiao" name="regiao_id" id="zona" required>
+              <option value="">Selecione</option>
+              <option value="1">Norte</option>
+              <option value="2">Sul</option>
+              <option value="3">Leste</option>
+              <option value="4">Oeste</option>
+            </select>
+          </div>
+          <div class="estrutura">
+            <label for="Celular"> Celular:</label><br />
+            <input type="text" name="celular" id="celular" placeholder="(xx) xxxxx-xxxx" required />
+          </div>
+          <div class="opcoes">
+            <button class="salvar" type="submit"> Salvar</button>
+            <button class="cancelar" type="reset"> Cancelar</button>
+            
+          </div>
+        </div>
+        </form>
+    </main>
+    <footer>
+        <p>Desenvolvido em grupo pelos alunos do grupo DRP07-PJI1 do Eixo de Computação da UNIVESP</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+</html>

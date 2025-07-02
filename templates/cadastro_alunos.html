@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <title>Cadastro de Alunos</title>
+  </head>
+  <body>
+    <div class="nome_login">
+    <p class="texto"><a class="link_logout" href="{{ url_for('logout') }}"> Encerrar sessão</a></p>
+    </div>
+    <header>
+      <h1>Cadastro dos Alunos</h1>
+      <!-- <p class="subtitulo">
+        Para o cadastro dos alunos é preciso selecionar a região e o motorista.</p> -->
+       <nav class="dropdown-menu">
+        <ul class="menu">
+          <li class="botao_nav"><a class="link" href="/home">Início</a></li>
+          <li class="botao_nav">Cadastrar
+            <ul class="lista-menu">
+              <li class="botao_nav"><a class="link" href="/cadastro_motoristas">Motoristas</a></li>
+              <li class="botao_nav"><a class="link" href="/cadastro_alunos">Alunos</a></li>
+          </ul>
+          </li>
+          <li class="botao_nav">Exibir
+            <ul class="lista-menu">
+              <li class="botao_nav"><a class="link" href="/motoristas">Motoristas Cadastrados</a></li>
+              <li class="botao_nav"><a class="link" href="/alunos">Alunos Cadastrados</a></li>
+            </ul>
+          </li>
+          <li class="botao_nav"><a class="link" href="/rotas">Rotas</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div>
+        <p>ATENÇÃO! <br>
+        Para o cadastro do aluno é necessário que já tenha ocorrido o cadastro do motorista. Não será possível cadastrar alunos sem vincular a um motorista. <br>
+        Os motoristas estão organizados por região para que eles aparareçam é preciso escolher a região primeiro. </p> 
+      </div>
+      <div>
+      {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flash-messages">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+</div>
+      <div class="cadastro">
+        <form class="formulario"   method="Post">
+          <div class="estrutura">
+            <label for="nome">Nome:</label><br />
+            <input type="text" name="nome"id="nome" placeholder="Insira o nome completo" required />
+          </div>
+
+          <div class="estrutura">
+            <label for="zona">Região:</label>
+            <select name="regiao_id"  id="zona">
+              <option value="">Selecione uma região</option>
+              {% for regiao in regioes %}
+              <option value="{{ regiao.id }}">{{ regiao.nome }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="estrutura">
+            <label for="motoristas">Motorista:</label>
+            <select class="motoristas" name="motorista_id" id="motoristas">
+              <option value="">Selecione um motorista</option>
+              
+            </select>
+          </div>
+
+          <div class="estrutura">
+            <label for="Celular"> Celular:</label><br />
+            <input type="text" name="celular" id="celular" placeholder="(xx) xxxxx-xxxx"  required />
+          </div>
+
+          <div class="opcoes">
+            <button class="salvar" type="submit">Salvar</button>
+            <button class="cancelar" type="reset">Cancelar</button>
+          </div>
+        </form>
+        
+      </div>
+    </main>
+    <footer>
+        <p>Desenvolvido em grupo pelos alunos do grupo DRP07-PJI1 do Eixo de Computação da UNIVESP</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+    <script src="/static/script.js"></script>
+  </body>
+</html>
