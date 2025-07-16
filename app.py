@@ -6,7 +6,10 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text  # certifique-se de importar isso no topo do arquivo
 from dotenv import load_dotenv
 load_dotenv()
+import logging
 
+logging.basicConfig(level=logging.DEBUG)
+logging.debug("🔧 Isso vai aparecer nos logs!")
 
 #todo Aprender btcrypt ou algo assim para o login ser seguro.
 
