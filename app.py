@@ -36,7 +36,8 @@ except Exception as e:
 def verifica_login():
     if not session.get("usuario_logado", False):
         return redirect(url_for("login")) #Redireciona para a rota do login
-print("🔗 DATABASE_URL:", POSTGRES_URI)       
+
+logging.debug("🔗 DATABASE_URL: " + str(POSTGRES_URI))
 #classe correspondente as tabelas.
 class Regioes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -70,6 +71,18 @@ class Alunos(db.Model):
 @app.route("/")
 def index():
     return render_template('index.html')
+
+
+@app.route("/dbcheck")
+def dbcheck():
+    try:
+        with db.engine.connect() as connection:
+            result = connection.execute(text("SELECT version();"))
+            version = result.fetchone()
+            return f"✅ Banco conectado! PostgreSQL versão: {version}"
+    except Exception as e:
+        return f"❌ Erro ao conectar: {e}"
+
 
 # Rota para a página login
 # Aqui o parâmetro que rota recebe veio de um a href do html por ser uma simples requisição.
