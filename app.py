@@ -17,7 +17,6 @@ logging.debug("🔧 Isso vai aparecer nos logs!")
 project_dir = os.path.dirname(os.path.abspath(__file__))
 
 POSTGRES_URI = os.getenv("DATABASE_URL")
-print(type(POSTGRES_URI))
 app = Flask(__name__)
 app.secret_key = 'temosUmaChaveAqui102' #chave secreta faz com o cookie salve as informações que só podem ser acessadas por quem tem a chave.
 app.config["SQLALCHEMY_DATABASE_URI"] = POSTGRES_URI
@@ -36,8 +35,10 @@ except Exception as e:
 def verifica_login():
     if not session.get("usuario_logado", False):
         return redirect(url_for("login")) #Redireciona para a rota do login
-
+print("🔗 DATABASE_URL:", POSTGRES_URI)
 logging.debug("🔗 DATABASE_URL: " + str(POSTGRES_URI))
+print(os.getenv("DATABASE_URL"))
+
 #classe correspondente as tabelas.
 class Regioes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
