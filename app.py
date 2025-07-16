@@ -33,7 +33,7 @@ except Exception as e:
 def verifica_login():
     if not session.get("usuario_logado", False):
         return redirect(url_for("login")) #Redireciona para a rota do login
-        
+print("🔗 DATABASE_URL:", POSTGRES_URI)       
 #classe correspondente as tabelas.
 class Regioes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
