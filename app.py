@@ -1,19 +1,34 @@
 from flask import Flask, render_template, request, url_for, flash, redirect, session, jsonify
 import os
 import sqlite3
+import psycopg2
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text  # certifique-se de importar isso no topo do arquivo
+from dotenv import load_dotenv
+load_dotenv()
+
 
 #todo Aprender btcrypt ou algo assim para o login ser seguro.
 
 #Conecta com o banco de dados que já foi criado anteriormente.
 project_dir = os.path.dirname(os.path.abspath(__file__))
-database_file = "sqlite:///{}".format(os.path.join(project_dir,"database.db"))
 
+POSTGRES_URI = os.getenv("DATABASE_URL")
+print(type(POSTGRES_URI))
 app = Flask(__name__)
 app.secret_key = 'temosUmaChaveAqui102' #chave secreta faz com o cookie salve as informações que só podem ser acessadas por quem tem a chave.
-app.config["SQLALCHEMY_DATABASE_URI"] = database_file
+app.config["SQLALCHEMY_DATABASE_URI"] = POSTGRES_URI
+# app.config["SQLALCHEMY_DATABASE_URI"] = database_file
 db = SQLAlchemy(app)
-
+# Realiza a consulta para veriticar a conexão com o banco de dados está funcionando.
+try:
+    with app.app_context():
+        with db.engine.connect() as connection:
+            result = connection.execute(text("SELECT version();"))
+            print("✅ Conectado! Versão do PostgreSQL:", result.fetchone())
+except Exception as e:
+    print("❌ Erro ao conectar com o PostgreSQL:")
+    print(e)
 # Função que verifica se está logado para o acesso as páginas Será chamada nas rotas
 def verifica_login():
     if not session.get("usuario_logado", False):
