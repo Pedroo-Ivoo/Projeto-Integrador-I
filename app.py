@@ -27,17 +27,15 @@ try:
     with app.app_context():
         with db.engine.connect() as connection:
             result = connection.execute(text("SELECT version();"))
-            print("✅ Conectado! Versão do PostgreSQL:", result.fetchone())
+            logging.debug("✅ Conectado! Versão do PostgreSQL:", result.fetchone())
 except Exception as e:
-    print("❌ Erro ao conectar com o PostgreSQL:")
-    print(e)
+    logging.debug("❌ Erro ao conectar com o PostgreSQL:")
+    logging.debug(e)
 # Função que verifica se está logado para o acesso as páginas Será chamada nas rotas
 def verifica_login():
     if not session.get("usuario_logado", False):
         return redirect(url_for("login")) #Redireciona para a rota do login
-print("🔗 DATABASE_URL:", POSTGRES_URI)
-logging.debug("🔗 DATABASE_URL: " + str(POSTGRES_URI))
-print(os.getenv("DATABASE_URL"))
+
 
 #classe correspondente as tabelas.
 class Regioes(db.Model):
